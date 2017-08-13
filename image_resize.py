@@ -49,20 +49,20 @@ def save_new_image(new_image, inimage_file, outpath):
     new_image.save(outpath)
 
 
-def validate_namespace(namespace):
+def isvalid_namespace(namespace):
     if not any((
             namespace.width,
             namespace.height,
             namespace.scale
             )):
         print('You have to provide width or height or scale')
-        sys.exit()
 
 
 if __name__ == '__main__':
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
-    validate_namespace(namespace)
+    if not isvalid_namespace(namespace):
+        sys.exit()
     new_image = resize_image(
                 namespace.width,
                 namespace.height,
